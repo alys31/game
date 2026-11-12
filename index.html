@@ -1,0 +1,1956 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Dapur Sigap — game memasak cepat warung Nusantara. Racik pesanan sesuai urutan resep, jaga kombo, dan pecahkan rekor skor di desktop maupun Android.">
+<meta name="author" content="Autonomous Product Studio">
+<meta name="theme-color" content="#F2E9D8">
+<meta name="color-scheme" content="light">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Dapur Sigap">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:type" content="game">
+<meta property="og:title" content="Dapur Sigap — Warung Nusantara">
+<meta property="og:description" content="Racik pesanan warung, jaga kombo, jangan biarkan pelanggan kabur.">
+<meta property="og:locale" content="id_ID">
+<meta property="og:site_name" content="Dapur Sigap">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Dapur Sigap — Warung Nusantara">
+<meta name="twitter:description" content="Racik pesanan warung, jaga kombo, jangan biarkan pelanggan kabur.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%232B2118'/%3E%3Ccircle%20cx='16'%20cy='18'%20r='9'%20fill='%23F2E9D8'/%3E%3Ccircle%20cx='16'%20cy='18'%20r='5'%20fill='%23C8502E'/%3E%3Ccircle%20cx='13'%20cy='16'%20r='1.5'%20fill='%23E5A33B'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='6'%20fill='%232B2118'/%3E%3Ccircle%20cx='16'%20cy='18'%20r='9'%20fill='%23F2E9D8'/%3E%3Ccircle%20cx='16'%20cy='18'%20r='5'%20fill='%23C8502E'/%3E%3C/svg%3E">
+<title>Dapur Sigap — Warung Nusantara</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+
+:root {
+  --paper: #F2E9D8;
+  --paper-2: #EADFC8;
+  --paper-3: #DCCEB1;
+  --ink: #2B2118;
+  --ink-soft: #4A3D30;
+  --muted: #8A7960;
+  --line: #B8A78A;
+  --terracotta: #C8502E;
+  --terracotta-dk: #9E3D20;
+  --turmeric: #E5A33B;
+  --turmeric-dk: #B87A20;
+  --leaf: #4A7A54;
+  --leaf-dk: #2F5337;
+  --error: #B33A2E;
+
+  --font-display: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Book Antiqua', serif;
+  --font-body: 'Trebuchet MS', 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+  --font-mono: 'Consolas', 'Menlo', 'Liberation Mono', monospace;
+
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.45;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  overscroll-behavior: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+button:focus-visible {
+  outline: 3px solid var(--turmeric);
+  outline-offset: 2px;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9000;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='160'%20height='160'%3E%3Cfilter%20id='n'%3E%3CfeTurbulence%20type='fractalNoise'%20baseFrequency='0.85'%20numOctaves='2'/%3E%3C/filter%3E%3Crect%20width='160'%20height='160'%20filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  display: none;
+}
+.screen.active { display: flex; flex-direction: column; }
+
+.screen[data-screen="menu"].active {
+  padding:
+    calc(24px + var(--safe-t))
+    calc(24px + var(--safe-r))
+    calc(24px + var(--safe-b))
+    calc(24px + var(--safe-l));
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 48px;
+  align-items: end;
+  max-width: 1040px;
+  width: 100%;
+  margin: auto;
+}
+
+.menu-main {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--ink);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(3.4rem, 13vw, 6.8rem);
+  line-height: 0.88;
+  letter-spacing: -0.035em;
+  margin: 0;
+  font-weight: 400;
+  color: var(--ink);
+}
+.title em {
+  font-style: italic;
+  color: var(--terracotta);
+  display: block;
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  font-style: italic;
+  color: var(--ink-soft);
+  max-width: 34ch;
+  margin: 0;
+  border-left: 3px solid var(--turmeric);
+  padding-left: 16px;
+}
+
+.menu-side {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.menu-best {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 14px 0 12px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.menu-best span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.menu-best strong {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.menu-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1rem;
+  min-height: 52px;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+  background: var(--paper);
+  color: var(--ink);
+  text-align: left;
+  width: 100%;
+}
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--ink);
+}
+.btn:active {
+  transform: translate(0, 0);
+  box-shadow: 0 0 0 var(--ink);
+}
+.btn-primary {
+  background: var(--terracotta);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+.btn-primary:hover { background: var(--terracotta-dk); }
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  font-weight: 500;
+}
+.btn-ghost:hover {
+  border-color: var(--ink);
+  background: var(--paper-2);
+}
+.btn .arrow {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.menu-foot {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-align: right;
+  margin-top: 4px;
+}
+.link-btn {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  color: inherit;
+  font: inherit;
+  padding: 6px 0;
+  min-height: 44px;
+}
+
+.screen[data-screen="playing"].active {
+  padding:
+    calc(10px + var(--safe-t))
+    calc(10px + var(--safe-r))
+    calc(10px + var(--safe-b))
+    calc(10px + var(--safe-l));
+  overflow: hidden;
+  touch-action: none;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hud {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 2px 10px;
+  border-bottom: 2px solid var(--ink);
+  flex-shrink: 0;
+}
+.hud-item { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1;
+}
+.hud-value {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+.hud-value.pulse { animation: hud-pulse 0.32s ease-out; }
+@keyframes hud-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.22); color: var(--terracotta); }
+  100% { transform: scale(1); }
+}
+.hud-value[data-low="true"] { color: var(--error); }
+.hud-spacer { flex: 1; }
+.hud-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 3px;
+  background: var(--paper);
+  transition: background-color 0.12s;
+}
+.icon-btn:hover { background: var(--paper-2); }
+.icon-btn:active { background: var(--paper-3); }
+.icon-btn[aria-pressed="true"] { background: var(--turmeric); }
+.icon-btn svg { width: 20px; height: 20px; }
+
+.orders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  flex-shrink: 0;
+  min-height: 0;
+}
+.orders-empty {
+  grid-column: 1 / -1;
+  padding: 24px;
+  border: 2px dashed var(--line);
+  border-radius: 4px;
+  text-align: center;
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.order-card {
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  border-radius: 4px;
+  padding: 8px 10px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  min-width: 0;
+  animation: order-in 0.32s cubic-bezier(0.34, 1.4, 0.64, 1);
+  will-change: transform, opacity;
+}
+@keyframes order-in {
+  from { opacity: 0; transform: translateY(-10px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.order-card.is-complete {
+  animation: order-complete 0.4s ease-in forwards;
+  pointer-events: none;
+}
+@keyframes order-complete {
+  0% { transform: scale(1); opacity: 1; }
+  40% { transform: scale(1.08); opacity: 1; background: var(--turmeric); }
+  100% { transform: scale(1.15) translateY(-8px); opacity: 0; }
+}
+.order-card.is-error {
+  animation: order-shake 0.34s ease;
+  background: var(--paper-2);
+}
+@keyframes order-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-4px); }
+  40% { transform: translateX(4px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(3px); }
+}
+
+.order-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+}
+.order-dish {
+  font-family: var(--font-display);
+  font-size: clamp(0.85rem, 2.2vw, 1rem);
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.order-timer {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  flex-shrink: 0;
+  min-width: 22px;
+  text-align: right;
+  line-height: 1;
+}
+.order-timer.urgent { color: var(--error); }
+
+.order-steps {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.step {
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--line);
+  border-radius: 3px;
+  font-size: 0.82rem;
+  filter: grayscale(1);
+  opacity: 0.45;
+  transition: all 0.15s ease;
+  line-height: 1;
+}
+.step.current {
+  border-color: var(--turmeric);
+  border-width: 2px;
+  filter: none;
+  opacity: 1;
+  background: rgba(229, 163, 59, 0.15);
+  animation: step-pulse 1.3s ease-in-out infinite;
+}
+@keyframes step-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 163, 59, 0.5); }
+  50% { box-shadow: 0 0 0 4px rgba(229, 163, 59, 0); }
+}
+.step.done {
+  border-color: var(--terracotta);
+  background: var(--terracotta);
+  filter: none;
+  opacity: 1;
+}
+
+.order-progress {
+  height: 3px;
+  background: var(--paper-3);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: auto;
+}
+.order-progress-fill {
+  height: 100%;
+  background: var(--leaf);
+  transform-origin: left;
+  transform: scaleX(1);
+  transition: background-color 0.3s;
+}
+.order-progress-fill.low { background: var(--error); }
+
+.score-pop {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--leaf-dk);
+  font-weight: 700;
+  pointer-events: none;
+  animation: score-pop 0.95s ease-out forwards;
+}
+@keyframes score-pop {
+  0% { opacity: 0; transform: translateY(4px) scale(0.6); }
+  30% { opacity: 1; transform: translateY(-4px) scale(1.15); }
+  100% { opacity: 0; transform: translateY(-36px) scale(1); }
+}
+
+.ingredients {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+}
+.ingredients-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 2px 2px 0;
+}
+.ingredients-head h2 {
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
+  font-weight: 400;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.2;
+}
+.hint {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin: 0;
+}
+.ingredient-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  flex: 1;
+  align-content: start;
+}
+.ing-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 8px 4px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 4px;
+  min-height: 62px;
+  transition: transform 0.08s ease, background-color 0.12s ease;
+  position: relative;
+}
+.ing-btn:hover { background: var(--paper-2); }
+.ing-btn:active {
+  transform: scale(0.93);
+  background: var(--turmeric);
+}
+.ing-btn .emoji {
+  font-size: 1.65rem;
+  line-height: 1;
+  pointer-events: none;
+}
+.ing-btn .name {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.ing-btn .key-hint {
+  position: absolute;
+  top: 2px;
+  right: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--muted);
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.screen[data-screen="paused"].active,
+.screen[data-screen="howto"].active,
+.screen[data-screen="settings"].active,
+.screen[data-screen="gameover"].active {
+  background: rgba(242, 233, 216, 0.97);
+  align-items: center;
+  justify-content: center;
+  padding:
+    calc(24px + var(--safe-t))
+    calc(20px + var(--safe-r))
+    calc(24px + var(--safe-b))
+    calc(20px + var(--safe-l));
+  overflow-y: auto;
+  z-index: 100;
+  touch-action: auto;
+}
+
+.modal {
+  max-width: 460px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: modal-in 0.3s ease-out;
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 6vw, 2.6rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin: 0;
+}
+.modal-sub {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--ink-soft);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.score-summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin: 4px 0;
+  padding: 14px 0;
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--line);
+}
+.score-summary > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+.score-summary span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.score-summary strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 4vw, 1.6rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.howto-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.howto-list li {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 12px;
+  align-items: start;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.howto-list .num {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--terracotta);
+  text-align: right;
+  line-height: 1.3;
+}
+.howto-list strong { display: block; font-weight: 700; margin-bottom: 2px; }
+
+.key-table {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  padding: 12px 14px;
+  background: var(--paper-2);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.key-table kbd {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  padding: 1px 6px;
+  font-family: inherit;
+  font-size: 0.7rem;
+}
+.key-table span { color: var(--ink-soft); }
+
+.settings-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+  gap: 12px;
+}
+.settings-row:first-of-type { border-top: 2px solid var(--ink); }
+.settings-row label {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.toggle {
+  width: 56px;
+  height: 32px;
+  border: 2px solid var(--ink);
+  border-radius: 16px;
+  background: var(--paper-3);
+  position: relative;
+  transition: background-color 0.2s;
+  flex-shrink: 0;
+}
+.toggle::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+.toggle[aria-pressed="true"] { background: var(--leaf); }
+.toggle[aria-pressed="true"]::after { transform: translateX(24px); background: var(--paper); }
+
+.toast-wrap {
+  position: fixed;
+  top: calc(72px + var(--safe-t));
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: none;
+  z-index: 500;
+  align-items: center;
+  max-width: calc(100% - 24px);
+}
+.toast {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  padding: 8px 14px;
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  animation: toast-in 0.24s ease-out, toast-out 0.35s ease-in 1.35s forwards;
+}
+.toast.error { background: var(--error); }
+.toast.success { background: var(--leaf-dk); }
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes toast-out {
+  to { opacity: 0; transform: translateY(-12px); }
+}
+
+.fly-emoji {
+  position: fixed;
+  font-size: 1.6rem;
+  pointer-events: none;
+  z-index: 600;
+  will-change: transform, opacity;
+  line-height: 1;
+}
+
+@media (max-width: 768px) {
+  .menu {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    align-items: stretch;
+  }
+  .title { font-size: clamp(3rem, 17vw, 4.6rem); }
+  .tagline { font-size: 0.95rem; max-width: none; }
+}
+
+@media (max-width: 480px) {
+  .hud { gap: 10px; }
+  .hud-actions .icon-btn { width: 40px; height: 40px; }
+  .hud-actions .icon-btn svg { width: 18px; height: 18px; }
+  .order-card { padding: 6px 8px 8px; gap: 6px; }
+  .step { width: 22px; height: 22px; font-size: 0.75rem; }
+  .ing-btn { min-height: 58px; padding: 6px 3px; }
+  .ing-btn .emoji { font-size: 1.5rem; }
+  .score-summary { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 360px) {
+  .ingredient-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+  .ing-btn .name { font-size: 0.52rem; }
+  .ing-btn .key-hint { display: none; }
+}
+
+@media (min-width: 600px) {
+  .step { width: 28px; height: 28px; font-size: 0.95rem; }
+  .ing-btn .key-hint { display: block; }
+}
+
+@media (min-width: 900px) {
+  .step { width: 32px; height: 32px; font-size: 1.1rem; }
+  .order-dish { font-size: 1.05rem; }
+  .order-timer { font-size: 0.9rem; }
+  .ingredient-grid { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+  .ing-btn { min-height: 72px; }
+  .ing-btn .emoji { font-size: 1.9rem; }
+  .ing-btn .name { font-size: 0.65rem; }
+}
+
+@media (orientation: landscape) and (max-height: 560px) and (min-width: 640px) {
+  .game {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 10px;
+    align-items: stretch;
+  }
+  .hud { grid-column: 1 / -1; grid-row: 1; padding-bottom: 6px; }
+  .orders {
+    grid-column: 1;
+    grid-row: 2;
+    grid-template-columns: 1fr;
+    align-content: start;
+    gap: 6px;
+    overflow-y: auto;
+  }
+  .ingredients {
+    grid-column: 2;
+    grid-row: 2;
+    min-height: 0;
+  }
+  .ingredient-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    overflow-y: auto;
+  }
+  .ing-btn { min-height: 52px; }
+  .ing-btn .emoji { font-size: 1.35rem; }
+  .ing-btn .name { font-size: 0.55rem; }
+  .ing-btn .key-hint { display: none; }
+  .toast-wrap { top: calc(56px + var(--safe-t)); }
+  .screen[data-screen="playing"].active {
+    padding-top: calc(6px + var(--safe-t));
+    padding-bottom: calc(6px + var(--safe-b));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="screen" data-screen="menu">
+  <div class="menu">
+    <div class="menu-main">
+      <span class="eyebrow">Warung Nusantara · Edisi Cepat</span>
+      <h1 class="title">Dapur <em>Sigap</em></h1>
+      <p class="tagline">Racik pesanan, jaga kombo, jangan biarkan pelanggan kabur.</p>
+    </div>
+    <div class="menu-side">
+      <div class="menu-best">
+        <span>Rekor Skor</span>
+        <strong data-bind="bestScore">0</strong>
+      </div>
+      <nav class="menu-actions">
+        <button class="btn btn-primary" data-action="start">
+          <span>Mulai Masak</span>
+          <span class="arrow" aria-hidden="true">→</span>
+        </button>
+        <button class="btn btn-ghost" data-action="howto">
+          <span>Cara Main</span>
+        </button>
+        <button class="btn btn-ghost" data-action="settings">
+          <span>Pengaturan</span>
+        </button>
+      </nav>
+      <div class="menu-foot">
+        <button class="link-btn" data-action="reset-data">Reset data tersimpan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="screen" data-screen="playing">
+  <div class="game">
+    <header class="hud">
+      <div class="hud-item">
+        <span class="hud-label">Skor</span>
+        <strong class="hud-value" data-bind="score" aria-live="polite" aria-atomic="true">0</strong>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Kombo</span>
+        <strong class="hud-value" data-bind="combo">×1</strong>
+      </div>
+      <div class="hud-item">
+        <span class="hud-label">Nyawa</span>
+        <strong class="hud-value" data-bind="lives" aria-live="polite" aria-atomic="true">♥♥♥</strong>
+      </div>
+      <div class="hud-spacer"></div>
+      <div class="hud-actions">
+        <button class="icon-btn" data-action="mute" aria-label="Bisukan suara" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true" data-icon="sound-on">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+            <path d="M16 8c1.5 1 2 2.5 2 4s-.5 3-2 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <path d="M19 5c2.5 2 3.5 4.5 3.5 7s-1 5-3.5 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button class="icon-btn" data-action="fullscreen" aria-label="Layar penuh">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="icon-btn" data-action="pause" aria-label="Jeda permainan">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="6" y="5" width="4" height="14" fill="currentColor"/>
+            <rect x="14" y="5" width="4" height="14" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <section class="orders" data-bind="orders" aria-label="Daftar pesanan"></section>
+
+    <section class="ingredients">
+      <header class="ingredients-head">
+        <h2>Rak Bahan</h2>
+        <p class="hint">Ketuk bahan sesuai urutan resep di atas</p>
+      </header>
+      <div class="ingredient-grid" data-bind="ingredients" aria-label="Rak bahan"></div>
+    </section>
+  </div>
+</div>
+
+<div class="screen" data-screen="paused">
+  <div class="modal">
+    <span class="eyebrow">Jeda</span>
+    <h2 class="modal-title">Dapur rehat.</h2>
+    <p class="modal-sub">Lanjut kapan saja, atau mulai ulang dari awal.</p>
+    <div class="modal-actions">
+      <button class="btn btn-primary" data-action="resume">
+        <span>Lanjut Masak</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+      <button class="btn btn-ghost" data-action="restart">
+        <span>Ulang dari Awal</span>
+      </button>
+      <button class="btn btn-ghost" data-action="to-settings">
+        <span>Pengaturan</span>
+      </button>
+      <button class="btn btn-ghost" data-action="menu">
+        <span>Keluar ke Menu</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" data-screen="settings">
+  <div class="modal">
+    <span class="eyebrow">Pengaturan</span>
+    <h2 class="modal-title">Setelan dapur.</h2>
+    <div class="settings-row">
+      <label for="toggle-sound">Suara efek</label>
+      <button class="toggle" id="toggle-sound" data-action="toggle-sound" aria-pressed="false" aria-label="Suara efek"></button>
+    </div>
+    <div class="settings-row" style="border-bottom: none;">
+      <label>Rekor Skor</label>
+      <strong style="font-family: var(--font-display); font-size: 1.4rem; font-weight: 400;" data-bind="settings-best">0</strong>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" data-action="reset-data">
+        <span>Reset Data Tersimpan</span>
+      </button>
+      <button class="btn btn-primary" data-action="settings-back">
+        <span>Kembali</span>
+        <span class="arrow" aria-hidden="true">←</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" data-screen="howto">
+  <div class="modal">
+    <span class="eyebrow">Cara Main</span>
+    <h2 class="modal-title">Tiga menit<br>jadi juru masak.</h2>
+    <ol class="howto-list">
+      <li>
+        <span class="num">01</span>
+        <div>
+          <strong>Baca pesanan.</strong>
+          Setiap kartu di atas menunjukkan urutan bahan yang harus ditambahkan.
+        </div>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <div>
+          <strong>Ketuk bahan dengan tepat.</strong>
+          Bahan yang benar akan mengisi satu langkah resep. Salah ketuk akan memutus kombo.
+        </div>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <div>
+          <strong>Jaga nyawa.</strong>
+          Pesanan yang hangus mengurangi satu nyawa. Tiga nyawa habis, dapur tutup.
+        </div>
+      </li>
+    </ol>
+    <div class="key-table" aria-label="Pintasan papan tombol">
+      <kbd>P</kbd><span>Jeda / lanjut</span>
+      <kbd>M</kbd><span>Bisukan suara</span>
+      <kbd>F</kbd><span>Layar penuh</span>
+      <kbd>R</kbd><span>Ulang dari awal</span>
+      <kbd>1–0</kbd><span>Pilih bahan cepat</span>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" data-action="howto-start">
+        <span>Mengerti, mulai!</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+      <button class="btn btn-ghost" data-action="howto-back">
+        <span>Kembali</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="screen" data-screen="gameover">
+  <div class="modal">
+    <span class="eyebrow">Tutup Warung</span>
+    <h2 class="modal-title">Tiga pesanan hangus.</h2>
+    <p class="modal-sub">Pelanggan pulang. Dapur istirahat dulu.</p>
+    <div class="score-summary">
+      <div>
+        <span>Skor</span>
+        <strong data-bind="finalScore">0</strong>
+      </div>
+      <div>
+        <span>Pesanan</span>
+        <strong data-bind="finalCompleted">0</strong>
+      </div>
+      <div>
+        <span>Rekor</span>
+        <strong data-bind="finalBest">0</strong>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-primary" data-action="restart">
+        <span>Buka Lagi</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+      <button class="btn btn-ghost" data-action="menu">
+        <span>Ke Menu Utama</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" aria-hidden="true" data-bind="toasts"></div>
+<div class="sr-only" role="status" aria-live="polite" data-bind="status"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var CONFIG = {
+    MAX_ORDERS: 3,
+    START_LIVES: 3,
+    BASE_TIMER: 20,
+    MIN_TIMER: 10,
+    BASE_SPAWN: 5200,
+    MIN_SPAWN: 2800,
+    RAMP_EVERY: 5,
+    SCORE_BASE: 100,
+    SCORE_PER_SEC: 5,
+    WRONG_PENALTY: 15,
+    COMBO_CAP: 5,
+    FIRST_SPAWN_DELAY: 1500,
+    COMPLETE_RESPAWN_DELAY: 900
+  };
+
+  var STORAGE_KEY = 'dapursigap_v1_state';
+
+  var INGREDIENTS = [
+    { id: 'nasi',   name: 'Nasi',   emoji: '🍚' },
+    { id: 'telur',  name: 'Telur',  emoji: '🥚' },
+    { id: 'mie',    name: 'Mie',    emoji: '🍜' },
+    { id: 'sayur',  name: 'Sayur',  emoji: '🥬' },
+    { id: 'ayam',   name: 'Ayam',   emoji: '🍗' },
+    { id: 'bawang', name: 'Bawang', emoji: '🧄' },
+    { id: 'kecap',  name: 'Kecap',  emoji: '🍶' },
+    { id: 'cabai',  name: 'Cabai',  emoji: '🌶️' },
+    { id: 'kacang', name: 'Kacang', emoji: '🥜' },
+    { id: 'daging', name: 'Daging', emoji: '🍖' }
+  ];
+
+  var ING_BY_ID = {};
+  INGREDIENTS.forEach(function (i) { ING_BY_ID[i.id] = i; });
+
+  var DISHES = [
+    { name: 'Nasi Goreng',  steps: ['nasi', 'telur', 'kecap', 'bawang'] },
+    { name: 'Mie Goreng',   steps: ['mie', 'telur', 'kecap', 'bawang'] },
+    { name: 'Nasi Uduk',    steps: ['nasi', 'bawang', 'telur'] },
+    { name: 'Gado-Gado',    steps: ['sayur', 'kacang', 'telur', 'bawang'] },
+    { name: 'Ayam Bakar',   steps: ['ayam', 'kecap', 'cabai', 'bawang'] },
+    { name: 'Tumis Sayur',  steps: ['sayur', 'bawang', 'cabai'] },
+    { name: 'Mie Ayam',     steps: ['mie', 'ayam', 'sayur', 'bawang'] },
+    { name: 'Soto Daging',  steps: ['daging', 'sayur', 'bawang', 'nasi'] },
+    { name: 'Sate Ayam',    steps: ['ayam', 'kecap', 'kacang'] },
+    { name: 'Nasi Campur',  steps: ['nasi', 'ayam', 'sayur', 'telur'] }
+  ];
+
+  var INGREDIENT_KEYS = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+
+  var state = {
+    screen: 'menu',
+    score: 0,
+    combo: 0,
+    lives: CONFIG.START_LIVES,
+    completed: 0,
+    orders: [],
+    nextOrderId: 1,
+    spawnTimer: CONFIG.FIRST_SPAWN_DELAY,
+    lastTime: 0,
+    rafId: null,
+    muted: false,
+    bestScore: 0,
+    tutorialSeen: false,
+    previousScreen: 'menu'
+  };
+
+  var els = {};
+  var timeouts = [];
+  var audioCtx = null;
+  var audioInitTried = false;
+
+  function later(fn, ms) {
+    var id = setTimeout(fn, ms);
+    timeouts.push(id);
+    return id;
+  }
+  function clearTimeouts() {
+    timeouts.forEach(clearTimeout);
+    timeouts = [];
+  }
+  function $(sel, root) { return (root || document).querySelector(sel); }
+  function $$(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
+
+  function initAudio() {
+    if (audioInitTried) return;
+    audioInitTried = true;
+    try {
+      var Ctx = window.AudioContext || window.webkitAudioContext;
+      if (Ctx) audioCtx = new Ctx();
+    } catch (e) { audioCtx = null; }
+  }
+  function resumeAudio() {
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume().catch(function () {});
+    }
+  }
+  function beep(opts) {
+    if (!audioCtx || state.muted) return;
+    try {
+      var now = audioCtx.currentTime;
+      var osc = audioCtx.createOscillator();
+      var gain = audioCtx.createGain();
+      osc.type = opts.type || 'sine';
+      osc.frequency.setValueAtTime(opts.freq, now);
+      if (opts.sweepTo) {
+        osc.frequency.exponentialRampToValueAtTime(opts.sweepTo, now + opts.dur);
+      }
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(opts.vol || 0.12, now + 0.012);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + opts.dur);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + opts.dur + 0.03);
+    } catch (e) {}
+  }
+  function sfxTap() { beep({ freq: 520, dur: 0.05, type: 'triangle', vol: 0.08 }); }
+  function sfxCorrect() { beep({ freq: 680, dur: 0.07, type: 'triangle', vol: 0.1 }); }
+  function sfxComplete() {
+    beep({ freq: 523, dur: 0.09, type: 'triangle', vol: 0.11 });
+    later(function () { beep({ freq: 659, dur: 0.09, type: 'triangle', vol: 0.11 }); }, 55);
+    later(function () { beep({ freq: 784, dur: 0.16, type: 'triangle', vol: 0.12 }); }, 110);
+  }
+  function sfxWrong() { beep({ freq: 180, dur: 0.16, type: 'sawtooth', vol: 0.09, sweepTo: 85 }); }
+  function sfxExpire() { beep({ freq: 340, dur: 0.22, type: 'sine', vol: 0.1, sweepTo: 130 }); }
+  function sfxGameOver() {
+    beep({ freq: 320, dur: 0.28, type: 'sine', vol: 0.11, sweepTo: 120 });
+    later(function () { beep({ freq: 200, dur: 0.4, type: 'sine', vol: 0.11, sweepTo: 70 }); }, 200);
+  }
+  function sfxMenu() { beep({ freq: 440, dur: 0.06, type: 'triangle', vol: 0.07 }); }
+
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      if (typeof data.bestScore === 'number' && data.bestScore >= 0) {
+        state.bestScore = data.bestScore;
+      }
+      if (typeof data.muted === 'boolean') state.muted = data.muted;
+      if (typeof data.tutorialSeen === 'boolean') state.tutorialSeen = data.tutorialSeen;
+    } catch (e) {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e2) {}
+    }
+  }
+  function saveSaved() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        bestScore: state.bestScore,
+        muted: state.muted,
+        tutorialSeen: state.tutorialSeen
+      }));
+    } catch (e) {}
+  }
+
+  function showScreen(name) {
+    $$('.screen').forEach(function (el) {
+      el.classList.toggle('active', el.getAttribute('data-screen') === name);
+    });
+    state.screen = name;
+  }
+
+  function updateHUD() {
+    els.score.textContent = String(state.score);
+    els.combo.textContent = '×' + getMultiplier();
+    var hearts = '';
+    for (var i = 0; i < CONFIG.START_LIVES; i++) {
+      hearts += i < state.lives ? '♥' : '♡';
+    }
+    els.lives.textContent = hearts;
+    els.lives.setAttribute('data-low', state.lives <= 1 ? 'true' : 'false');
+  }
+
+  function pulse(el) {
+    if (!el) return;
+    el.classList.remove('pulse');
+    void el.offsetWidth;
+    el.classList.add('pulse');
+  }
+
+  function getMultiplier() {
+    return Math.min(1 + Math.floor(state.combo / 2), CONFIG.COMBO_CAP);
+  }
+
+  function buildIngredientGrid() {
+    els.ingredients.innerHTML = '';
+    INGREDIENTS.forEach(function (ing, idx) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'ing-btn';
+      btn.setAttribute('data-ing', ing.id);
+      btn.setAttribute('aria-label', 'Tambah ' + ing.name);
+      var keyLabel = idx < INGREDIENT_KEYS.length ? INGREDIENT_KEYS[idx] : '';
+      btn.innerHTML =
+        '<span class="key-hint" aria-hidden="true">' + (keyLabel || '') + '</span>' +
+        '<span class="emoji" aria-hidden="true">' + ing.emoji + '</span>' +
+        '<span class="name">' + ing.name + '</span>';
+      btn.addEventListener('click', function () { handleIngredientTap(ing.id, btn); });
+      els.ingredients.appendChild(btn);
+    });
+  }
+
+  function pickDish() {
+    var pool = DISHES;
+    if (state.completed >= 8) {
+      pool = DISHES.filter(function (d) { return d.steps.length >= 4; });
+    }
+    if (pool.length === 0) pool = DISHES;
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  function getDifficultyLevel() {
+    return Math.floor(state.completed / CONFIG.RAMP_EVERY);
+  }
+  function getTimerDuration() {
+    var lvl = getDifficultyLevel();
+    return Math.max(CONFIG.MIN_TIMER, CONFIG.BASE_TIMER - lvl * 1.5);
+  }
+  function getSpawnInterval() {
+    var lvl = getDifficultyLevel();
+    return Math.max(CONFIG.MIN_SPAWN, CONFIG.BASE_SPAWN - lvl * 400);
+  }
+
+  function spawnOrder() {
+    if (state.orders.length >= CONFIG.MAX_ORDERS) return;
+    var dish = pickDish();
+    var duration = getTimerDuration();
+    var order = {
+      id: state.nextOrderId++,
+      dishName: dish.name,
+      steps: dish.steps.slice(),
+      done: 0,
+      timeLeft: duration,
+      maxTime: duration,
+      el: null,
+      timerEl: null,
+      barEl: null
+    };
+    state.orders.push(order);
+    createOrderEl(order);
+  }
+
+  function createOrderEl(order) {
+    var card = document.createElement('div');
+    card.className = 'order-card';
+    card.setAttribute('data-id', String(order.id));
+    card.setAttribute('aria-label', 'Pesanan ' + order.dishName);
+
+    var head = document.createElement('div');
+    head.className = 'order-head';
+    var dish = document.createElement('span');
+    dish.className = 'order-dish';
+    dish.textContent = order.dishName;
+    var timer = document.createElement('span');
+    timer.className = 'order-timer';
+    timer.textContent = String(Math.ceil(order.timeLeft));
+    head.appendChild(dish);
+    head.appendChild(timer);
+
+    var steps = document.createElement('div');
+    steps.className = 'order-steps';
+    order.steps.forEach(function (sid, i) {
+      var s = document.createElement('span');
+      s.className = 'step' + (i === 0 ? ' current' : '');
+      s.textContent = ING_BY_ID[sid].emoji;
+      s.setAttribute('aria-label', ING_BY_ID[sid].name);
+      steps.appendChild(s);
+    });
+
+    var prog = document.createElement('div');
+    prog.className = 'order-progress';
+    var fill = document.createElement('div');
+    fill.className = 'order-progress-fill';
+    prog.appendChild(fill);
+
+    card.appendChild(head);
+    card.appendChild(steps);
+    card.appendChild(prog);
+
+    order.el = card;
+    order.timerEl = timer;
+    order.barEl = fill;
+
+    els.orders.appendChild(card);
+    updateOrderEl(order);
+  }
+
+  function updateOrderEl(order) {
+    if (!order.el) return;
+    var stepEls = $$('.step', order.el);
+    stepEls.forEach(function (s, i) {
+      s.classList.remove('current', 'done');
+      if (i < order.done) s.classList.add('done');
+      else if (i === order.done) s.classList.add('current');
+    });
+    order.barEl.style.transform = 'scaleX(' + Math.max(0, order.timeLeft / order.maxTime) + ')';
+  }
+
+  function removeOrderEl(order, animationClass) {
+    var card = order.el;
+    if (!card) return;
+    if (animationClass) card.classList.add(animationClass);
+    var el = card;
+    later(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 450);
+  }
+
+  function toast(msg, kind) {
+    var t = document.createElement('div');
+    t.className = 'toast' + (kind ? ' ' + kind : '');
+    t.textContent = msg;
+    els.toasts.appendChild(t);
+    later(function () {
+      if (t.parentNode) t.parentNode.removeChild(t);
+    }, 1900);
+  }
+  function announce(msg) {
+    if (els.status) {
+      els.status.textContent = '';
+      later(function () { els.status.textContent = msg; }, 30);
+    }
+  }
+
+  function flyEmoji(fromEl, toEl, emoji) {
+    if (!fromEl || !toEl) return;
+    var fr = fromEl.getBoundingClientRect();
+    var tr = toEl.getBoundingClientRect();
+    var fly = document.createElement('div');
+    fly.className = 'fly-emoji';
+    fly.textContent = emoji;
+    var size = 26;
+    fly.style.left = (fr.left + fr.width / 2 - size / 2) + 'px';
+    fly.style.top = (fr.top + fr.height / 2 - size / 2) + 'px';
+    document.body.appendChild(fly);
+    var dx = (tr.left + tr.width / 2) - (fr.left + fr.width / 2);
+    var dy = (tr.top + tr.height / 2) - (fr.top + fr.height / 2);
+    if (fly.animate) {
+      var anim = fly.animate([
+        { transform: 'translate(0, 0) scale(1)', opacity: 1 },
+        { transform: 'translate(' + dx + 'px, ' + dy + 'px) scale(0.4)', opacity: 0.85 }
+      ], { duration: 340, easing: 'cubic-bezier(0.4, 0, 0.2, 1)' });
+      anim.onfinish = function () { if (fly.parentNode) fly.parentNode.removeChild(fly); };
+    } else {
+      later(function () { if (fly.parentNode) fly.parentNode.removeChild(fly); }, 340);
+    }
+  }
+
+  function handleIngredientTap(ingId, sourceEl) {
+    if (state.screen !== 'playing') return;
+    sfxTap();
+
+    var matches = state.orders.filter(function (o) {
+      return o.done < o.steps.length && o.timeLeft > 0 && o.steps[o.done] === ingId;
+    });
+
+    if (matches.length === 0) {
+      state.combo = 0;
+      state.score = Math.max(0, state.score - CONFIG.WRONG_PENALTY);
+      sfxWrong();
+      if (navigator.vibrate) { try { navigator.vibrate(35); } catch (e) {} }
+      toast('Bahan salah — kombo putus', 'error');
+      var first = state.orders.slice().sort(function (a, b) { return a.timeLeft - b.timeLeft; })[0];
+      if (first && first.el) {
+        first.el.classList.remove('is-error');
+        void first.el.offsetWidth;
+        first.el.classList.add('is-error');
+      }
+      updateHUD();
+      return;
+    }
+
+    var target = matches.reduce(function (a, b) {
+      return a.timeLeft < b.timeLeft ? a : b;
+    });
+
+    var stepIng = ING_BY_ID[ingId];
+    target.done++;
+    flyEmoji(sourceEl, target.el, stepIng.emoji);
+    sfxCorrect();
+
+    if (target.done >= target.steps.length) {
+      completeOrder(target);
+    } else {
+      updateOrderEl(target);
+    }
+  }
+
+  function completeOrder(order) {
+    var timeBonus = Math.round(Math.max(0, order.timeLeft) * CONFIG.SCORE_PER_SEC);
+    var mult = getMultiplier();
+    var gain = (CONFIG.SCORE_BASE + timeBonus) * mult;
+    state.score += gain;
+    state.combo++;
+    state.completed++;
+
+    state.orders = state.orders.filter(function (o) { return o.id !== order.id; });
+
+    if (order.el) {
+      var pop = document.createElement('div');
+      pop.className = 'score-pop';
+      pop.textContent = '+' + gain;
+      order.el.appendChild(pop);
+    }
+    removeOrderEl(order, 'is-complete');
+
+    sfxComplete();
+    pulse(els.score);
+    pulse(els.combo);
+    updateHUD();
+    announce('Pesanan ' + order.dishName + ' selesai. Skor ' + state.score);
+
+    if (state.orders.length < CONFIG.MAX_ORDERS && state.spawnTimer > CONFIG.COMPLETE_RESPAWN_DELAY) {
+      state.spawnTimer = CONFIG.COMPLETE_RESPAWN_DELAY;
+    }
+  }
+
+  function expireOrder(order) {
+    state.orders = state.orders.filter(function (o) { return o.id !== order.id; });
+    removeOrderEl(order, 'is-error');
+    state.lives--;
+    state.combo = 0;
+    sfxExpire();
+    toast('Pesanan hangus', 'error');
+    pulse(els.lives);
+    updateHUD();
+    announce('Pesanan ' + order.dishName + ' hangus. Nyawa tersisa ' + state.lives);
+
+    if (state.lives <= 0) {
+      endGame();
+    }
+  }
+
+  function loop(t) {
+    if (state.screen !== 'playing') return;
+    var dt = Math.min((t - state.lastTime) / 1000, 0.05);
+    if (!isFinite(dt) || dt < 0) dt = 0;
+    state.lastTime = t;
+    update(dt);
+    if (state.screen === 'playing') {
+      state.rafId = requestAnimationFrame(loop);
+    }
+  }
+
+  function update(dt) {
+    state.spawnTimer -= dt * 1000;
+    if (state.spawnTimer <= 0 && state.orders.length < CONFIG.MAX_ORDERS) {
+      spawnOrder();
+      state.spawnTimer = getSpawnInterval();
+    }
+
+    var toExpire = [];
+    for (var i = 0; i < state.orders.length; i++) {
+      var o = state.orders[i];
+      o.timeLeft -= dt;
+      if (o.timeLeft <= 0) {
+        o.timeLeft = 0;
+        toExpire.push(o);
+      }
+    }
+    for (var j = 0; j < toExpire.length; j++) {
+      expireOrder(toExpire[j]);
+      if (state.screen !== 'playing') return;
+    }
+
+    for (var k = 0; k < state.orders.length; k++) {
+      var ord = state.orders[k];
+      if (!ord.timerEl) continue;
+      var secs = Math.ceil(ord.timeLeft);
+      if (ord.timerEl.textContent !== String(secs)) {
+        ord.timerEl.textContent = String(secs);
+        ord.timerEl.classList.toggle('urgent', secs <= 5);
+      }
+      if (ord.barEl) {
+        var frac = Math.max(0, ord.timeLeft / ord.maxTime);
+        ord.barEl.style.transform = 'scaleX(' + frac + ')';
+        ord.barEl.classList.toggle('low', frac < 0.3);
+      }
+    }
+  }
+
+  function startGame() {
+    initAudio();
+    resumeAudio();
+    clearTimeouts();
+
+    state.score = 0;
+    state.combo = 0;
+    state.lives = CONFIG.START_LIVES;
+    state.completed = 0;
+    state.orders = [];
+    state.nextOrderId = 1;
+    state.spawnTimer = CONFIG.FIRST_SPAWN_DELAY;
+    state.lastTime = performance.now();
+    state.rafId = null;
+
+    els.orders.innerHTML = '';
+    updateHUD();
+    updateBestUI();
+
+    showScreen('playing');
+    state.screen = 'playing';
+    state.rafId = requestAnimationFrame(loop);
+    requestWakeLock();
+  }
+
+  function pauseGame() {
+    if (state.screen !== 'playing') return;
+    state.previousScreen = 'paused';
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    state.rafId = null;
+    showScreen('paused');
+  }
+
+  function resumeGame() {
+    if (state.screen !== 'paused') return;
+    state.lastTime = performance.now();
+    showScreen('playing');
+    state.screen = 'playing';
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    state.rafId = requestAnimationFrame(loop);
+  }
+
+  function endGame() {
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    state.rafId = null;
+    clearTimeouts();
+    sfxGameOver();
+    state.previousScreen = 'gameover';
+
+    if (state.score > state.bestScore) {
+      state.bestScore = state.score;
+      saveSaved();
+    }
+    els.finalScore.textContent = String(state.score);
+    els.finalCompleted.textContent = String(state.completed);
+    els.finalBest.textContent = String(state.bestScore);
+    showScreen('gameover');
+    announce('Permainan selesai. Skor akhir ' + state.score + '. Rekor ' + state.bestScore);
+  }
+
+  function exitToMenu() {
+    if (state.rafId) cancelAnimationFrame(state.rafId);
+    state.rafId = null;
+    clearTimeouts();
+    state.orders.forEach(function (o) {
+      if (o.el && o.el.parentNode) o.el.parentNode.removeChild(o.el);
+    });
+    state.orders = [];
+    els.orders.innerHTML = '';
+    updateHUD();
+    updateBestUI();
+    showScreen('menu');
+  }
+
+  function updateBestUI() {
+    if (els.bestScore) els.bestScore.textContent = String(state.bestScore);
+    if (els.settingsBest) els.settingsBest.textContent = String(state.bestScore);
+    updateSoundUI();
+  }
+  function updateSoundUI() {
+    if (els.muteBtn) {
+      els.muteBtn.setAttribute('aria-pressed', state.muted ? 'true' : 'false');
+      els.muteBtn.setAttribute('aria-label', state.muted ? 'Nyalakan suara' : 'Bisukan suara');
+    }
+    if (els.soundToggle) {
+      els.soundToggle.setAttribute('aria-pressed', state.muted ? 'false' : 'true');
+    }
+  }
+
+  function toggleMute() {
+    state.muted = !state.muted;
+    saveSaved();
+    updateSoundUI();
+    if (!state.muted) {
+      initAudio();
+      resumeAudio();
+      sfxMenu();
+    }
+    toast(state.muted ? 'Suara dimatikan' : 'Suara dinyalakan', 'success');
+  }
+
+  function toggleFullscreen() {
+    try {
+      var doc = document;
+      var el = doc.documentElement;
+      var isFs = doc.fullscreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement;
+      if (isFs) {
+        if (doc.exitFullscreen) doc.exitFullscreen();
+        else if (doc.webkitExitFullscreen) doc.webkitExitFullscreen();
+        else if (doc.msExitFullscreen) doc.msExitFullscreen();
+      } else {
+        var req = el.requestFullscreen || el.webkitRequestFullscreen || el.msRequestFullscreen;
+        if (req) {
+          var p = req.call(el);
+          if (p && p.catch) p.catch(function () { toast('Layar penuh tidak tersedia', 'error'); });
+        } else {
+          toast('Layar penuh tidak didukung', 'error');
+        }
+      }
+    } catch (e) {
+      toast('Layar penuh gagal', 'error');
+    }
+  }
+
+  function openHowTo() {
+    showScreen('howto');
+  }
+  function openSettings(from) {
+    state.previousScreen = from || 'menu';
+    showScreen('settings');
+    updateBestUI();
+  }
+  function closeSettings() {
+    showScreen(state.previousScreen || 'menu');
+  }
+
+  function resetData() {
+    if (!window.confirm('Hapus rekor dan pengaturan? Tindakan ini tidak bisa dibatalkan.')) return;
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    state.bestScore = 0;
+    state.muted = false;
+    state.tutorialSeen = false;
+    updateBestUI();
+    toast('Data direset', 'success');
+  }
+
+  function onAction(action) {
+    initAudio();
+    resumeAudio();
+    sfxMenu();
+    switch (action) {
+      case 'start':
+        if (!state.tutorialSeen) {
+          showScreen('howto');
+        } else {
+          startGame();
+        }
+        break;
+      case 'howto-start':
+        state.tutorialSeen = true;
+        saveSaved();
+        startGame();
+        break;
+      case 'howto':
+        openHowTo();
+        break;
+      case 'howto-back':
+        showScreen('menu');
+        break;
+      case 'settings':
+        openSettings('menu');
+        break;
+      case 'to-settings':
+        openSettings('paused');
+        break;
+      case 'settings-back':
+        closeSettings();
+        break;
+      case 'resume':
+        resumeGame();
+        break;
+      case 'pause':
+        pauseGame();
+        break;
+      case 'restart':
+        startGame();
+        break;
+      case 'menu':
+        exitToMenu();
+        break;
+      case 'mute':
+        toggleMute();
+        break;
+      case 'toggle-sound':
+        toggleMute();
+        break;
+      case 'fullscreen':
+        toggleFullscreen();
+        break;
+      case 'reset-data':
+        resetData();
+        break;
+    }
+  }
+
+  function onKeyDown(e) {
+    var tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+    if (tag === 'input' || tag === 'textarea') return;
+
+    var key = e.key;
+
+    if (state.screen === 'playing') {
+      var idx = INGREDIENT_KEYS.indexOf(key);
+      if (idx >= 0 && idx < INGREDIENTS.length) {
+        e.preventDefault();
+        var btn = els.ingredients.querySelector('[data-ing="' + INGREDIENTS[idx].id + '"]');
+        handleIngredientTap(INGREDIENTS[idx].id, btn);
+        return;
+      }
+    }
+
+    if (key === 'p' || key === 'P' || key === 'Escape' || key === 'Esc') {
+      e.preventDefault();
+      if (state.screen === 'playing') pauseGame();
+      else if (state.screen === 'paused') resumeGame();
+      else if (state.screen === 'settings') closeSettings();
+      else if (state.screen === 'howto') showScreen('menu');
+      return;
+    }
+    if (key === 'm' || key === 'M') {
+      e.preventDefault();
+      toggleMute();
+      return;
+    }
+    if (key === 'f' || key === 'F') {
+      e.preventDefault();
+      toggleFullscreen();
+      return;
+    }
+    if (key === 'r' || key === 'R') {
+      if (state.screen === 'playing' || state.screen === 'paused' || state.screen === 'gameover') {
+        e.preventDefault();
+        if (window.confirm('Ulang dari awal? Skor saat ini akan hilang.')) {
+          startGame();
+        }
+      }
+      return;
+    }
+  }
+
+  function handleVisibility() {
+    if (document.hidden && state.screen === 'playing') {
+      pauseGame();
+    }
+    if (!document.hidden) {
+      resumeAudio();
+    }
+  }
+  function handleBlur() {
+    if (state.screen === 'playing') pauseGame();
+  }
+
+  function handlePopState() {
+    if (state.screen === 'playing') {
+      pauseGame();
+      history.pushState({ app: 'dapursigap' }, '', location.href);
+    } else if (state.screen === 'paused') {
+      exitToMenu();
+      history.pushState({ app: 'dapursigap' }, '', location.href);
+    } else if (state.screen === 'gameover') {
+      exitToMenu();
+      history.pushState({ app: 'dapursigap' }, '', location.href);
+    } else if (state.screen === 'howto' || state.screen === 'settings') {
+      showScreen(state.previousScreen || 'menu');
+      history.pushState({ app: 'dapursigap' }, '', location.href);
+    }
+  }
+
+  function cacheDom() {
+    els.score = $('[data-bind="score"]');
+    els.combo = $('[data-bind="combo"]');
+    els.lives = $('[data-bind="lives"]');
+    els.bestScore = $('[data-bind="bestScore"]');
+    els.settingsBest = $('[data-bind="settings-best"]');
+    els.orders = $('[data-bind="orders"]');
+    els.ingredients = $('[data-bind="ingredients"]');
+    els.toasts = $('[data-bind="toasts"]');
+    els.status = $('[data-bind="status"]');
+    els.muteBtn = $('.hud [data-action="mute"]');
+    els.soundToggle = $('#toggle-sound');
+    els.finalScore = $('[data-bind="finalScore"]');
+    els.finalCompleted = $('[data-bind="finalCompleted"]');
+    els.finalBest = $('[data-bind="finalBest"]');
+  }
+
+  function bindEvents() {
+    document.addEventListener('click', function (e) {
+      var t = e.target;
+      var actionEl = t.closest ? t.closest('[data-action]') : null;
+      if (actionEl) {
+        var action = actionEl.getAttribute('data-action');
+        onAction(action);
+      }
+    });
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('visibilitychange', handleVisibility);
+    window.addEventListener('blur', handleBlur);
+    window.addEventListener('popstate', handlePopState);
+
+    document.addEventListener('pointerdown', function () {
+      initAudio();
+      resumeAudio();
+    }, { once: true });
+
+    var canvasGame = $('[data-screen="playing"]');
+    if (canvasGame) {
+      canvasGame.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      canvasGame.addEventListener('dragstart', function (e) { e.preventDefault(); });
+    }
+  }
+
+  var wakeLock = null;
+  function requestWakeLock() {
+    if (!navigator.wakeLock) return;
+    try {
+      navigator.wakeLock.request('screen').then(function (lock) {
+        wakeLock = lock;
+      }).catch(function () {});
+    } catch (e) {}
+  }
+  function setupWakeLock() {
+    if (!('wakeLock' in navigator)) return;
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        if (wakeLock) { try { wakeLock.release(); } catch (e) {} wakeLock = null; }
+      } else if (state.screen === 'playing') {
+        requestWakeLock();
+      }
+    });
+  }
+
+  function init() {
+    cacheDom();
+    loadSaved();
+    updateBestUI();
+    buildIngredientGrid();
+    bindEvents();
+    showScreen('menu');
+    try {
+      history.pushState({ app: 'dapursigap' }, '', location.href);
+    } catch (e) {}
+    setupWakeLock();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>
+## Cara Main Singkatuk **Mulai Masak**
